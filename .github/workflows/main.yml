@@ -51,7 +51,7 @@ jobs:
           dotnet-version: '2.2.x'
       - name: Pack NuGet
         shell: pwsh
-        run: ./common/nuget-pack.ps1 -Version "1.6.0.${{ github.run_id }}" -NuGet nuget
+        run: ./common/nuget-pack.ps1 -Version "1.7.0.${{ github.run_id }}" -NuGet nuget
 
       - name: NuGet cache
         uses: actions/cache@v2
