@@ -71,28 +71,19 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: tdlib.osx
-          path: ./artifacts
+          path: artifacts
 
       - name: Read version from ref
         id: version
         shell: pwsh
         run: Write-Output "::set-output name=version::$($env:GITHUB_REF -replace '^refs/tags/v', '')"
-      - name: Create release
-        id: release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: v${{ steps.version.outputs.version }}
-          draft: true
 
       - name: Upload artifact
-        uses: actions/upload-release-asset@v1
+        uses: softprops/action-gh-release@v0.1.5
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.release.outputs.upload_url }}
-          asset_name: tdlib.osx.zip
-          asset_path: ./artifacts/*
-          asset_content_type: application/octet-stream
+          files: artifacts/tdlib.osx
+          tag_name: ${{ github.ref }}
+          name: v${{ steps.version.outputs.version }}
+          draft: true
