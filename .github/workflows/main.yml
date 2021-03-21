@@ -71,7 +71,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: tdlib.osx
-          path: ./artifacts/osx
+          path: ./artifacts
 
       - name: Read version from ref
         id: version
@@ -94,5 +94,5 @@ jobs:
         with:
           upload_url: ${{ steps.release.outputs.upload_url }}
           asset_name: tdlib.osx.zip
-          asset_path: ./artifacts/osx/*
+          asset_path: ./artifacts/*
           asset_content_type: application/octet-stream
