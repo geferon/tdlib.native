@@ -71,7 +71,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: tdlib.osx
-          path: artifacts
+          path: ~/artifacts
 
       - name: Read version from ref
         id: version
@@ -83,7 +83,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          files: artifacts/tdlib.osx
-          tag_name: ${{ github.ref }}
+          files: ~/artifacts/tdlib.osx
+          fail_on_unmatched_files: true
           name: v${{ steps.version.outputs.version }}
           draft: true
